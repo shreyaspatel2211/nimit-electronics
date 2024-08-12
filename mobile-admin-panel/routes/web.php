@@ -26,3 +26,4 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('admin/products', [ProductController::class, 'index'])->name('voyager.products.index');
 
 
+

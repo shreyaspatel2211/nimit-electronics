@@ -12,6 +12,9 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        if(empty(Auth::user())){
+            return redirect('/admin');
+        }
         $query = Product::query();
         $products = Product::get()->pluck('all_shops')->toArray();
         /** @var $user User */
@@ -42,7 +45,7 @@ class ProductController extends Controller
         }
         $totalProducts = $query->count();
 
-        $perPage = $request->get('per_page', 10); // Default to 12 if not provided
+        $perPage = $request->get('per_page', 12); // Default to 12 if not provided
         if ($perPage == 'all') {
             $dataTypeContent = $query->get();
         } else {
